@@ -1,0 +1,77 @@
+*,
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: flex;
+  background: linear-gradient(125deg, red, brown) no-repeat;
+}
+
+/* Basic main */
+
+span[desc]{
+  font-size: 14px;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Main */
+
+.sideBar{
+  height: 100vh;
+  width: 300px;
+  color: white;
+  background: rgb(0, 0, 0, .5);
+}
+.info{
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 70px);
+  flex-flow: column nowrap;
+}
+.info > *{
+  margin-top: 30px;
+}
+.info > *:first-child{
+  margin-top: 0;
+}
+.info:first-child{
+  margin-top: 0;
+}
+.game{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main{
+  width: 405px;
+  overflow: hidden;
+  border-collapse: collapse;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 5px rgba(50, 0, 0, .25)
+}
+.cell{
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: center;
+  font-weight: 700;
+  z-index: 5;
+  cursor: pointer;
+  filter: brightness(90%);
+}
+.cell:hover{
+  filter: brightness(100%);
+}
+.cell > *{
+  margin-top: 50%;
+  margin-left: 50%;
+  transform: translate(-40%, -30%);
+}

@@ -1,0 +1,10 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox='395 160 240 268' class="board">
+  <polyline style="fill: rgb(0, 205, 0); outline: none; stroke-width: 1px;"
+    points="408,160 408,413 395,413 395,428 438,428 438,413 424,413 424,244 420,258 514,210 408,160 "></polyline>
+  <foreignObject height="268px" width="119px" x="514" y="160" style="outline: none; stroke-width: 1px;">
+    <svg style="transform: rotatey(180deg)" viewBox="395 160 119 268">
+      <polyline style="fill: red;"
+        points="408,160 408,413 395,413 395,428 438,428 438,413 424,413 424,244 420,258 514,210 408,160 "></polyline>
+    </svg>
+  </foreignObject>
+</svg>

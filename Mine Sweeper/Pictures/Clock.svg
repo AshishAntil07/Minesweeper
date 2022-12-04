@@ -1,0 +1,13 @@
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='1 0 73 66' height='72.5px' width='66px'>
+  <circle cx='33' cy='40' r='27' stroke='black' stroke-width='6px' fill='none' />
+  <circle cx='33' cy='40' r='2.5'/>
+  <polygon points="31,40 15.5,22.5 33,38" />
+  <polygon points="30.5,10 30.5,5 25.5,5 25.5,0 40.5,0 40.5,5 35.5,5 35.5,10" />
+  <script type='application/ecmascript'>
+    const params = new URL(location.href).searchParams;
+    document.documentElement.children[0].style.stroke = '#'+params.get('color');
+    document.documentElement.children[1].style.fill = '#'+params.get('color');
+    document.documentElement.children[2].style.fill = '#'+params.get('color');
+    document.documentElement.children[3].style.fill = '#'+params.get('color');    
+  </script>
+</svg>
