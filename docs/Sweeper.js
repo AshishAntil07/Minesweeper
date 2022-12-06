@@ -11,95 +11,100 @@ class Elems{
     return flag;
   }
   game(state, main){
-    const container = document.createElement('div');
-    container.setAttribute('style', `
-      height: 175px;
-      width: 300px;
-      position: absolute;
-      left: ${(window.innerWidth+Number(getComputedStyle(sideBar).width.replace('px', '')))/2}px;
-      top: 50%;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      background: rgb(139, 0, 0, .6);
-      border: 1px solid yellow;
-      border-radius: 10px;
-      z-index: 100;
-      color: white;
-      transform: translate(-50%, -50%);
-    `)
+    if(!completed){
+      const container = document.createElement('div');
+      container.setAttribute('style', `
+        height: 175px;
+        width: 300px;
+        position: absolute;
+        left: ${(window.innerWidth+Number(getComputedStyle(sideBar).width.replace('px', '')))/2}px;
+        top: 50%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        background: rgb(139, 0, 0, .6);
+        border: 1px solid yellow;
+        border-radius: 10px;
+        z-index: 100;
+        color: white;
+        transform: translate(-50%, -50%);
+      `)
 
-    const top = document.createElement('div');
-    top.setAttribute('style', `
-      padding: 5px;
-      display: flex;
-      width: 100%;
-    `)
+      const top = document.createElement('div');
+      top.setAttribute('style', `
+        padding: 5px;
+        display: flex;
+        width: 100%;
+      `)
 
-    const heading = document.createElement('div');
-    heading.innerHTML = state==='over'?'Game Over':'Victory!';
-    heading.setAttribute('style', `
-      text-align: center;
-      font-family: 'cascadia code', consolas;
-      font-size: 25px;
-      width: 100%;
-    `)
+      const heading = document.createElement('div');
+      heading.innerHTML = state==='over'?'Game Over':'Victory!';
+      heading.setAttribute('style', `
+        text-align: center;
+        font-family: 'cascadia code', consolas;
+        font-size: 25px;
+        width: 100%;
+      `)
 
-    const cross = document.createElement('div');
-    cross.setAttribute('style', `
-      height: 25px;
-      width: 25px;
-      cursor: pointer;
-    `)
-    cross.innerHTML = '&Cross;';
-    cross.addEventListener('click', e => {
-      main.remove();
-      Start();
-    })
-    top.append(heading, cross);
+      const cross = document.createElement('div');
+      cross.setAttribute('style', `
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+      `)
+      cross.innerHTML = '&Cross;';
+      cross.addEventListener('click', e => {
+        completed=false;
+        main.remove();
+        Start();
+      })
+      top.append(heading, cross);
 
-    const times = document.createElement('div');
-    times.setAttribute('style', `
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    `)
+      const times = document.createElement('div');
+      times.setAttribute('style', `
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      `)
 
-    if((!localStorage.getItem('Minesweeper') || Number(yourTime.children[1].innerHTML)<JSON.parse(localStorage.getItem('Minesweeper')).best) && state!=='over'){
-      bestTime.children[1].innerHTML = yourTime.children[1].innerHTML;
-      localStorage.setItem('Minesweeper', JSON.stringify({best: Number(bestTime.children[1].innerHTML)}))
+      if((!localStorage.getItem('Minesweeper') || Number(yourTime.children[1].innerHTML)<JSON.parse(localStorage.getItem('Minesweeper')).best) && state!=='over'){
+        bestTime.children[1].innerHTML = yourTime.children[1].innerHTML;
+        localStorage.setItem('Minesweeper', JSON.stringify({best: Number(bestTime.children[1].innerHTML)}))
+      }
+
+      const best = document.createElement('div');
+      best.innerHTML = `<embed src='Pictures/Clock.svg?color=e0bf00' height='75px' width='75px'><span desc style='color: #e0bf00'>Best Time</span>${JSON.parse(localStorage.getItem('Minesweeper'))?.best || 0}s`;
+      best.setAttribute('style', `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column nowrap;
+        font-size: 20px;
+        font-weight: 500;
+      `)
+
+      const current = document.createElement('div');
+      current.innerHTML = `<embed src='Pictures/Clock.svg?color=ff0000' height='75px' width='75px'><span desc style='color: #ff0000'>Your Time</span>${yourTime.children[1].innerHTML}s`;
+      current.setAttribute('style', `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column nowrap;
+        font-size: 20px;
+        font-weight: 500;
+      `)
+      times.append(current, best);
+      completed = true;
+
+      yourTime.children[1].innerHTML = 0;
+      container.append(top, times);
+      return container;
     }
-
-    const best = document.createElement('div');
-    best.innerHTML = `<embed src='Pictures/Clock.svg?color=e0bf00' height='75px' width='75px'><span desc style='color: #e0bf00'>Best Time</span>${JSON.parse(localStorage.getItem('Minesweeper'))?.best || 0}s`;
-    best.setAttribute('style', `
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-flow: column nowrap;
-      font-size: 20px;
-      font-weight: 500;
-    `)
-
-    const current = document.createElement('div');
-    current.innerHTML = `<embed src='Pictures/Clock.svg?color=ff0000' height='75px' width='75px'><span desc style='color: #ff0000'>Your Time</span>${yourTime.children[1].innerHTML}s`;
-    current.setAttribute('style', `
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-flow: column nowrap;
-      font-size: 20px;
-      font-weight: 500;
-    `)
-    times.append(current, best);
-
-    yourTime.children[1].innerHTML = 0;
-    container.append(top, times);
-    return container;
   }
 }
+let completed = false;
 
 const sideBar = document.createElement('div');
 sideBar.classList.add('sideBar');
